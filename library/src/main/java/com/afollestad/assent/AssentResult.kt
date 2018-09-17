@@ -9,7 +9,6 @@ package com.afollestad.assent
 
 import android.content.pm.PackageManager.PERMISSION_DENIED
 import android.content.pm.PackageManager.PERMISSION_GRANTED
-import androidx.annotation.CheckResult
 import com.afollestad.assent.internal.containsPermission
 
 /**
@@ -29,10 +28,10 @@ class AssentResult(
   }
 
   /** Returns true if this result contains the given permission. */
-  @CheckResult fun containsPermissions(permission: Permission) =
+  fun containsPermissions(permission: Permission) =
     this.permissions.containsPermission(permission)
 
-  @CheckResult fun isAllGranted(permissions: List<Permission>): Boolean {
+  fun isAllGranted(permissions: List<Permission>): Boolean {
     for (perm in permissions) {
       val index = this.permissions.indexOfFirst { it.value == perm.value }
       if (index == -1) {
@@ -47,10 +46,10 @@ class AssentResult(
   }
 
   /** Returns true if all permissions in the given array have been granted. */
-  @CheckResult fun isAllGranted(vararg permissions: Permission) = isAllGranted(permissions.toList())
+  fun isAllGranted(vararg permissions: Permission) = isAllGranted(permissions.toList())
 
   /** Returns true if all permissions in the given array have been denied. */
-  @CheckResult fun isAllDenied(vararg permissions: Permission): Boolean {
+  fun isAllDenied(vararg permissions: Permission): Boolean {
     for (perm in permissions) {
       val index = this.permissions.indexOfFirst { it.value == perm.value }
       if (index == -1) {

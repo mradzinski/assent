@@ -7,8 +7,7 @@ package com.afollestad.assent
 
 import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
-import androidx.annotation.CheckResult
-import androidx.core.content.ContextCompat.checkSelfPermission
+import android.support.v4.content.ContextCompat
 import com.afollestad.assent.internal.Data.Companion.LOCK
 import com.afollestad.assent.internal.Data.Companion.assureFragment
 import com.afollestad.assent.internal.Data.Companion.get
@@ -18,9 +17,9 @@ import com.afollestad.assent.internal.equalsPermissions
 typealias Callback = (result: AssentResult) -> Unit
 typealias RunMe = (Unit) -> Unit
 
-@CheckResult fun Context.isAllGranted(vararg permissions: Permission): Boolean {
+fun Context.isAllGranted(vararg permissions: Permission): Boolean {
   for (perm in permissions) {
-    val granted = checkSelfPermission(
+    val granted = ContextCompat.checkSelfPermission(
         this, perm.value
     ) == PERMISSION_GRANTED
     if (!granted) return false
